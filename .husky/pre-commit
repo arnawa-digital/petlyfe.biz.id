@@ -1,0 +1,27 @@
+echo "🏗️👷 Running pre-commit checks..."
+
+npm run check-format || 
+{ 
+    echo "❌ Prettier failed. Run: npm run format"; 
+    exit 1; 
+}
+
+npm run lint || 
+{ 
+    echo "❌ ESLint failed. Fix issues before committing."; 
+    exit 1; 
+}
+
+npm run check-types || 
+{ 
+    echo "❌ TypeScript type check failed."; 
+    exit 1; 
+}
+
+npm run build || 
+{ 
+    echo "❌ Build failed. Fix issues before committing."; 
+    exit 1; 
+}
+
+echo "✅ All checks passed. Proceeding with commit."
